@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication1.DataAccess;
 
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20200416082541_SeedInitialData")]
+    partial class SeedInitialData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,13 +27,13 @@ namespace WebApplication1.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Email")
+                    b.Property<string>("email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Username")
+                    b.Property<string>("username")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -42,16 +44,16 @@ namespace WebApplication1.Migrations
                         new
                         {
                             Id = 1,
-                            Email = "chaman.raghav@vicesoftware.com",
-                            Password = "123465487",
-                            Username = "Chaman"
+                            email = "chaman.raghav@vicesoftware.com",
+                            password = "123465487",
+                            username = "Chaman"
                         },
                         new
                         {
                             Id = 2,
-                            Email = "sanjeevsharma@vicesofteware.com",
-                            Password = "12457845",
-                            Username = "Sanjeev"
+                            email = "sanjeevsharma@vicesofteware.com",
+                            password = "12457845",
+                            username = "Sanjeev"
                         });
                 });
 #pragma warning restore 612, 618
