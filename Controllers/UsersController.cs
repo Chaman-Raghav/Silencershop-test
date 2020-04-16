@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.DataAccess;
-using WebApplication1.Modals;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
@@ -21,9 +21,9 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet]
-        public ActionResult<object> GetUser()
+        public IEnumerable<User> GetUser()
         {
-            var users = _context.Users.ToList();
+            IEnumerable<User> users = _context.Users.ToList();
             return users;
         }
 
