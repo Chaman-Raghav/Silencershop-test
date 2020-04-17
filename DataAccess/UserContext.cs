@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApplication1.Modals;
+using WebApplication1.Models;
 
 namespace WebApplication1.DataAccess
 {
@@ -11,6 +11,7 @@ namespace WebApplication1.DataAccess
     {
         public UserContext(DbContextOptions options) : base(options) { }
         public DbSet<User> Users { get; set; }
+        public DbSet<Document> Documents { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasData(

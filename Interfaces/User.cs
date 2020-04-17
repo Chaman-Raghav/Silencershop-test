@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication1.Interfaces
 {
-    public class Users
+    public class User
     {
         public int Id { get; set; }
         public string Username { get; set; }
