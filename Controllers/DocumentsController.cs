@@ -54,16 +54,11 @@ namespace WebApplication1.Controllers
 
         [HttpPost]
         [Route("AddDocument")]
-        public OkResult PostDocument(Document document)
+        public OkResult PostDocument([FromForm]Document document)
         {
             try
             {
-                _context.Documents.Add(new Document()
-                {
-                    id = document.id,
-                    Customer_Name= document.Customer_Name,
-                    isFlagged= document.isFlagged
-                });
+                _context.Documents.Add(document);
                 _context.SaveChanges();
             }
             catch (DbUpdateException ex)
@@ -75,19 +70,28 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPut]
-        [Route("EditDocument")]
-        public IActionResult EditDocumentDetails([FromForm]Document document)
+        [Route("EditDocument/{documentId:int}")]
+        public IActionResult EditDocumentDetails(int documentId, [FromForm]Document document)
         {
-            try
+            Document doc = _context.Documents.FirstOrDefault(doc => (doc.id == documentId));
+            if (doc != null)
             {
-                _context.Documents.Update(document);
-               _context.SaveChanges();
+                try
+                {
+                    _context.Documents.Update(doc);
+                    _context.SaveChanges();
+                }
+                catch (DbUpdateException ex)
+                {
+                    Console.WriteLine("Error while Updating the user:", ex.InnerException.Message);
+                    throw;
+                }
             }
-            catch (DbUpdateException ex)
+            else
             {
-                Console.WriteLine("Error while Updating the user:", ex.InnerException.Message);
-                throw;
+                return BadRequest();
             }
+            
             return Ok();
         }
     }
