@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.DataAccess;
+using Microsoft.AspNetCore.Authorization;
+using WebApplication1.Modals;
 
 namespace WebApplication1.Controllers
 {

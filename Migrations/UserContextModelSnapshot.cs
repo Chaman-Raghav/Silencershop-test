@@ -54,6 +54,38 @@ namespace WebApplication1.Migrations
                             Username = "Sanjeev"
                         });
                 });
+
+            modelBuilder.Entity("WebApplication1.Models.Document", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Customer_Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isFlagged")
+                        .HasColumnType("bit");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Documents");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1001,
+                            Customer_Name = "Chaman",
+                            isFlagged = true
+                        },
+                        new
+                        {
+                            id = 1002,
+                            Customer_Name = "Sanjeev",
+                            isFlagged = true
+                        });
+                });
 #pragma warning restore 612, 618
         }
     }
