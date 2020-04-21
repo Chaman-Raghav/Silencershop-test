@@ -22,7 +22,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: api/Documents
-        [HttpGet]
+        [HttpGet("/api/Documents")]
         public List<Document> GetDocument()
         {
             var documents = _context.Documents.ToList();
