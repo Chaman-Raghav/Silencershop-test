@@ -13,9 +13,11 @@ namespace WebApplication1.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [ForeignKey("Id")]
-        public int? DocumentId { get; set; }
-        public Document Document { get; set; }
         public string SerialNumberIs { get; set; }
+
+        #region ForeignKeys
+        [ForeignKey("Id")]
+        public Document Document { get; set; }
+        #endregion ForeignKeys
     }
 }

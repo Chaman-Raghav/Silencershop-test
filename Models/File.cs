@@ -13,19 +13,18 @@ namespace WebApplication1.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
-        [ForeignKey("Id")]
-        public int? DocumentId { get; set; }
-        public Document Document { get; set; }
         public string FileName { get; set; }
-
-        [ForeignKey("Id")]
-        public int? UserId { get; set; }
-        public User User { get; set; }
         public DateTime? UploadedDate { get; set; }
 
+        #region ForeignKeys
         [ForeignKey("Id")]
-        public int? FileTypeId { get; set; }
+        public User User { get; set; }
+
+        [ForeignKey("Id")]
+        public Document Document { get; set; }
+
+        [ForeignKey("Id")]
         public FileType FileType { get; set; }
+        #endregion ForeignKeys
     }
 }

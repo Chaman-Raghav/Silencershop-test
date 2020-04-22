@@ -13,15 +13,15 @@ namespace WebApplication1.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public string CurrentStatus { get; set; }
+        public DateTime? FlaggedTime { get; set; }
 
+        #region ForeignKeys
         [ForeignKey("Id")]
-        public int? DocumentId { get; set; }
         public Document Document { get; set; }
         
         [ForeignKey("Id")]
-        public int? UserId { get; set; }
         public User User { get; set; }
-        public DateTime FlaggedTime { get; set; }
-        public string CurrentStatus { get; set; }
+        #endregion ForeignKeys
     }
 }

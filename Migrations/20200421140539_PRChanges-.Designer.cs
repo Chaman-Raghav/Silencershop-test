@@ -10,8 +10,8 @@ using WebApplication1.DataAccess;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20200421121844_NextTables")]
-    partial class NextTables
+    [Migration("20200421140539_PRChanges-")]
+    partial class PRChanges
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -72,17 +72,7 @@ namespace WebApplication1.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("DocumentId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("DocumentId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("AssignedUsers");
                 });
@@ -94,17 +84,14 @@ namespace WebApplication1.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CreationDate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("CreationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("CustomerName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DocumentStatusId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ExpirationDate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("ExpirationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool?>("IsAssigned")
                         .HasColumnType("bit");
@@ -118,17 +105,10 @@ namespace WebApplication1.Migrations
                     b.Property<string>("TSN")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("VersionNumber")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DocumentStatusId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Documents");
                 });
@@ -143,28 +123,27 @@ namespace WebApplication1.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DocumentId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EventMadeBy")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EventType")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
+
+                    b.ToTable("DocumentHistories");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.DocumentHistoryEvent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("EventType")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DocumentId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("DocumentHistories");
+                    b.ToTable("DocumentHistoryEvent");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.DocumentStatus", b =>
@@ -189,28 +168,13 @@ namespace WebApplication1.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("DocumentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("FileTypeId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UploadedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("DocumentId");
-
-                    b.HasIndex("FileTypeId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Files");
                 });
@@ -240,20 +204,10 @@ namespace WebApplication1.Migrations
                     b.Property<string>("CurrentStatus")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DocumentId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("FlaggedTime")
+                    b.Property<DateTime?>("FlaggedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("DocumentId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("FlaggedDocuments");
                 });
@@ -268,9 +222,6 @@ namespace WebApplication1.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DocumentId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("InitialDate")
                         .HasColumnType("datetime2");
 
@@ -278,8 +229,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DocumentId");
 
                     b.ToTable("GlobalCorrectionLogs");
                 });
@@ -294,17 +243,7 @@ namespace WebApplication1.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DocumentId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("DocumentId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Notes");
                 });
@@ -316,101 +255,132 @@ namespace WebApplication1.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("DocumentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("SerialNumberIs")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DocumentId");
 
                     b.ToTable("SerialNumbers");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.AssignedUser", b =>
                 {
-                    b.HasOne("WebApplication1.Models.Document", "Document")
-                        .WithMany("AssignedUsers")
-                        .HasForeignKey("DocumentId");
-
                     b.HasOne("WebApplication1.Modals.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApplication1.Models.Document", "Document")
+                        .WithMany("AssignedUsers")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Document", b =>
                 {
-                    b.HasOne("WebApplication1.Models.DocumentStatus", "DocumentStatus")
-                        .WithMany()
-                        .HasForeignKey("DocumentStatusId");
-
                     b.HasOne("WebApplication1.Modals.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApplication1.Models.DocumentStatus", "DocumentStatus")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WebApplication1.Models.DocumentHistory", b =>
                 {
+                    b.HasOne("WebApplication1.Modals.User", "EventMadeByUser")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WebApplication1.Models.Document", "Document")
                         .WithMany("DocumentHistories")
-                        .HasForeignKey("DocumentId");
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("WebApplication1.Modals.User", "User")
+                    b.HasOne("WebApplication1.Models.DocumentHistoryEvent", "EventType")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WebApplication1.Models.File", b =>
                 {
+                    b.HasOne("WebApplication1.Modals.User", "User")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WebApplication1.Models.Document", "Document")
                         .WithMany("Files")
-                        .HasForeignKey("DocumentId");
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("WebApplication1.Models.FileType", "FileType")
                         .WithMany()
-                        .HasForeignKey("FileTypeId");
-
-                    b.HasOne("WebApplication1.Modals.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WebApplication1.Models.FlaggedDocument", b =>
                 {
-                    b.HasOne("WebApplication1.Models.Document", "Document")
-                        .WithMany("FlaggedDocuments")
-                        .HasForeignKey("DocumentId");
-
                     b.HasOne("WebApplication1.Modals.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApplication1.Models.Document", "Document")
+                        .WithMany("FlaggedDocuments")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WebApplication1.Models.GlobalCorrectionLog", b =>
                 {
                     b.HasOne("WebApplication1.Models.Document", "Document")
                         .WithMany("GlobalCorrectionLogs")
-                        .HasForeignKey("DocumentId");
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Note", b =>
                 {
-                    b.HasOne("WebApplication1.Models.Document", "Document")
-                        .WithMany("Notes")
-                        .HasForeignKey("DocumentId");
-
                     b.HasOne("WebApplication1.Modals.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApplication1.Models.Document", "Document")
+                        .WithMany("Notes")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WebApplication1.Models.SerialNumber", b =>
                 {
                     b.HasOne("WebApplication1.Models.Document", "Document")
                         .WithMany("SerialNumbers")
-                        .HasForeignKey("DocumentId");
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

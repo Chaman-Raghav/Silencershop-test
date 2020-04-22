@@ -11,9 +11,7 @@ namespace WebApplication1.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [ForeignKey("EventType")]
         public int Id { get; set; }
-        public DocumentHistory DocumentHistory { get; set; }
         public string EventType { get; set; }
     }
 }

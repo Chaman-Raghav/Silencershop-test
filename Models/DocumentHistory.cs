@@ -13,16 +13,19 @@ namespace WebApplication1.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
-        [ForeignKey("Id")]
-        public int? DocumentId { get; set; }
-        public Document Document { get; set; }
-        public int? EventType { get; set; }
-
-        [ForeignKey("Id")]
-        public int? EventMadeBy { get; set; }
-        public User User { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+
+        #region ForeignKeys
+        [ForeignKey("Id")]
+        public Document Document { get; set; }
+
+        [ForeignKey("Id")]
+        public DocumentHistoryEvent EventType { get; set; }
+
+        [ForeignKey("Id")]
+        public User EventMadeByUser { get; set; }
+        #endregion ForeignKeys
+
     }
 }

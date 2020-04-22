@@ -13,12 +13,14 @@ namespace WebApplication1.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [ForeignKey("Id")]
-        public int? DocumentId { get; set; }
-        public Document Document { get; set; }
         public string Description { get; set; }
+
+        #region ForeignKeys
         [ForeignKey("Id")]
-        public int? UserId { get; set; }
+        public Document Document { get; set; }
+        
+        [ForeignKey("Id")]
         public User User { get; set; }
+        #endregion ForeignKeys
     }
 }
