@@ -5,16 +5,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-
-namespace WebApplication1.Modals
+namespace WebApplication1.Models
 {
-    public class User
+    public class DocumentHistoryEvent
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public string EventType { get; set; }
     }
 }
